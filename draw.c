@@ -77,11 +77,18 @@ void draw_line(int x0, int y0, int x1, int y1, screen s, color c) {
 	}
 	printf("(%d, %d) --> (%d, %d)\n", x0, y0, x1, y1);
 
+
 	int deltaX = (x1 - x0);
 	int deltaY = (y1 - y0);
 
+	//after the swap, the only possible octants are 1, 2, 7 and 8
+
+	//octant 2
 	if(deltaY > deltaX) draw_line_oct(y0, x0, y1, x1, s, c, 1, 0);
+	//octant 1
 	else if(deltaY <= deltaX && deltaY >= 0) draw_line_oct(x0, y0, x1, y1, s, c, 0, 0);
+	//octant 8
 	else if(deltaY < 0 && deltaY >= -1 * deltaX) draw_line_oct(x0, y0, x1, 2 * y0 - y1, s, c, 0, 1);
+	//octant 7
 	else draw_line_oct(y0, x0, 2 * y0 - y1, x1, s, c, 1, 1);
 }
